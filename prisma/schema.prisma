@@ -22,9 +22,17 @@ model User {
 }
 
 model Vehicle {
-  id     String @id @default(cuid())
-  model  String
-  vin    String
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+  id      String    @id @default(cuid())
+  model   String
+  vin     String
+  user    User      @relation(fields: [userId], references: [id])
+  userId  String
+  Invoice Invoice[]
+}
+
+model Invoice {
+  id         String  @id @default(cuid())
+  total_cost Decimal
+  vehicleId  String
+  vehicle    Vehicle @relation(fields: [vehicleId], references: [id])
 }
