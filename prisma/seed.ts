@@ -1,6 +1,5 @@
 import { randEmail, randFullName, randVehicle } from "@ngneat/falso";
 import { PrismaClient } from "@prisma/client";
-import * as vinGenerator from "vin-generator";
 
 const prisma = new PrismaClient();
 
@@ -11,7 +10,20 @@ async function main() {
     const email = randEmail();
     const name = randFullName();
     const vehicleModel = randVehicle();
-    const vin = vinGenerator.generateVin();
+
+    const vins = [
+      "JH4KA3269HC010561",
+      "JS3TX92V364102160",
+      "JH4DB1560PS003184",
+      "1C4RJFAG8DC537142",
+      "WBSPM9C52BE202514",
+      "JH4KA4576KC031014",
+      "JF1SF63501H759113",
+      "JH4DA9470NS002903",
+      "JT6HF10U3Y0133607",
+      "1G8AN15F07Z174255",
+      "JH4DB1540NS801082",
+    ];
 
     await prisma.user.upsert({
       where: { email },
@@ -22,7 +34,7 @@ async function main() {
         vehicles: {
           create: {
             model: vehicleModel,
-            vin,
+            vin: vins[i],
           },
         },
       },
