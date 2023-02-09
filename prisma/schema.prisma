@@ -11,12 +11,13 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  name      String
-  email     String    @unique
-  createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  vehicles  Vehicle[]
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  createdAt    DateTime  @default(now()) @map(name: "created_at")
+  updatedAt    DateTime  @updatedAt @map(name: "updated_at")
+  vehicles     Vehicle[]
+  passwordHash String
 
   @@map("users")
 }
