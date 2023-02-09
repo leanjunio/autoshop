@@ -1,6 +1,6 @@
 import { randEmail, randFullName, randVehicle } from "@ngneat/falso";
 import { PrismaClient } from "@prisma/client";
-import vinGenerator from "vin-generator";
+import * as vinGenerator from "vin-generator";
 
 const prisma = new PrismaClient();
 
