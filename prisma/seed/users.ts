@@ -1,4 +1,4 @@
-import { hash } from "@/utils/hash";
+import { hash } from "../../src/utils/hash";
 
 export const users = [
   {

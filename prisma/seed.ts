@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 async function main() {
   await Promise.all(
     users.map(async (user) => {
-      prisma.user.upsert({
+      await prisma.user.upsert({
         where: { id: user.id },
         update: {},
         create: user,
@@ -17,7 +17,7 @@ async function main() {
 
   await Promise.all(
     vehicles.map(async (vehicle) => {
-      prisma.vehicle.upsert({
+      await prisma.vehicle.upsert({
         where: { id: vehicle.id },
         update: {},
         create: vehicle,
