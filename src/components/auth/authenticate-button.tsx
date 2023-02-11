@@ -4,8 +4,16 @@ export default function AuthenticateButton() {
   const { data: session } = useSession();
 
   if (session) {
-    return <button onClick={signOut}>Logout</button>;
+    return (
+      <button className="btn btn-outline" onClick={signOut}>
+        Logout
+      </button>
+    );
   }
 
-  return <button onClick={signIn}>Login</button>;
+  return (
+    <button className="btn btn-outline" onClick={signIn}>
+      Login
+    </button>
+  );
 }
