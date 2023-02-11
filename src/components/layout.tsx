@@ -1,9 +1,14 @@
 import Navbar from "./navbar";
 
-export default function Layout() {
+type LayoutProps = {
+  children: React.ReactNode;
+};
+
+export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="min-h-screen w-full border">
+    <div className="min-h-screen w-full">
       <Navbar />
+      <div className="my-8 container mx-auto">{children}</div>
     </div>
   );
 }
