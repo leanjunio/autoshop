@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AuthenticateButton from "./auth/authenticate-button";
 
 export default function Navbar() {
   return (
@@ -14,7 +15,7 @@ export default function Navbar() {
             <Link href="/vehicles">Vehicles</Link>
           </li>
           <li>
-            <Link href="/login">Login</Link>
+            <AuthenticateButton />
           </li>
         </ul>
       </div>
