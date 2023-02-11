@@ -6,21 +6,16 @@ const prisma = new PrismaClient();
 
 async function main() {
   await Promise.all(
-    users.map(async (user) => {
+    users.map(async (user, i) => {
       await prisma.user.upsert({
-        where: { id: user.id },
+        where: { email: user.email },
         update: {},
-        create: user,
-      });
-    })
-  );
-
-  await Promise.all(
-    vehicles.map(async (vehicle) => {
-      await prisma.vehicle.upsert({
-        where: { id: vehicle.id },
-        update: {},
-        create: vehicle,
+        create: {
+          ...user,
+          vehicles: {
+            create: vehicles[i],
+          },
+        },
       });
     })
   );
