@@ -20,7 +20,9 @@ export default function Vehicles({ vehicles }: VehiclesPageProps) {
       </Head>
       <Layout>
         <div>
-          <p className="text-2xl font-bold">All Vehicles</p>
+          <div className="mb-12">
+            <p className="text-5xl font-bold">All Vehicles</p>
+          </div>
           {vehicles.map((vehicle) => (
             <VehicleRow key={vehicle.id} vehicle={vehicle} />
           ))}
