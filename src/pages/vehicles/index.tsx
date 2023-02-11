@@ -1,4 +1,5 @@
 import Layout from "@/components/layout";
+import VehicleRow from "@/components/vehicles/vehicle/row";
 import prisma from "@/lib/prisma";
 import { InferGetServerSidePropsType } from "next";
 import Head from "next/head";
@@ -19,8 +20,9 @@ export default function Vehicles({ vehicles }: VehiclesPageProps) {
       </Head>
       <Layout>
         <div>
+          <p className="text-2xl font-bold">All Vehicles</p>
           {vehicles.map((vehicle) => (
-            <p key={vehicle.id}>vin: {vehicle.vin}</p>
+            <VehicleRow key={vehicle.id} vehicle={vehicle} />
           ))}
         </div>
       </Layout>

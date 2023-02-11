@@ -5,4 +5,9 @@ module.exports = {
     extend: {},
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    styled: false,
+    base: true,
+    utils: false,
+  },
 };
