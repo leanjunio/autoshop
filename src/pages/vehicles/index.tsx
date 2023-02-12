@@ -50,6 +50,7 @@ export default function Vehicles({ vehicles }: VehiclesPageProps) {
       </>
     );
   }
+
   return (
     <>
       <Head>
