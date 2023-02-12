@@ -19,6 +19,14 @@ model User {
   updatedAt    DateTime  @updatedAt @map(name: "updated_at")
   vehicles     Vehicle[]
   passwordHash String
+  phone_number String
+  year_joined  Int
+
+  // Location information
+  street      String
+  city        String
+  province    String
+  postal_code String
 }
 
 model Vehicle {
