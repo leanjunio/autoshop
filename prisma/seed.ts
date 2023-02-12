@@ -34,7 +34,7 @@ function createRandomVehicle(): RandomVehicle {
 
 async function main() {
   await Promise.all(
-    users.map(async (user, i) => {
+    users.map(async (user) => {
       await prisma.user.upsert({
         where: { email: user.email },
         update: {},
