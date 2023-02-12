@@ -1,13 +1,17 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import AuthenticateButton from "./auth/authenticate-button";
 
 export default function Navbar() {
+  const { data: session } = useSession();
+
   return (
     <div className="navbar bg-base-100">
-      <div className="flex-1">
-        <Link className="btn btn-ghost normal-case text-xl" href="/">
+      <div className="flex-1 gap-x-5">
+        <Link className="font-bold normal-case" href="/">
           Autoshop
         </Link>
+        <p className="align-middle">{session?.user?.email}</p>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1 space-x-5">
