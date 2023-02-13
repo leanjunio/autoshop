@@ -4,12 +4,15 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { getServerSession } from "next-auth";
 import Head from "next/head";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { Vehicle } from "@prisma/client";
+import VehicleRow from "@/components/vehicles/vehicle/row";
 
 type ResponseType = {
   user: {
     name: string;
     email: string;
     phone_number: string;
+    vehicles: Vehicle[];
   };
 };
 
@@ -24,7 +27,7 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
       where: {
         email: session.user.email,
       },
-      select: { name: true, email: true, phone_number: true },
+      select: { name: true, email: true, phone_number: true, vehicles: true },
     });
 
     if (!user) {
@@ -47,6 +50,7 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
 type DashboardProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 export default function Dashboard({ user }: DashboardProps) {
+  console.log({ vehicles: user.vehicles });
   return (
     <div>
       <Head>
@@ -65,7 +69,14 @@ export default function Dashboard({ user }: DashboardProps) {
             </div>
           </div>
           <div className="flex w-4/5 flex-col gap-y-10 border p-16">
-            <div className="border p-4 h-full">1</div>
+            <div className=" p-4 h-full">
+              <p className="my-2 font-bold text-xl">Vehicles</p>
+              <div className="my-5">
+                {user.vehicles.map((vehicle) => (
+                  <VehicleRow key={vehicle.id} vehicle={vehicle} />
+                ))}
+              </div>
+            </div>
             <div className="border p-4">2</div>
           </div>
         </div>
