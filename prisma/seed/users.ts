@@ -1,7 +1,10 @@
 import { hash } from "../../src/utils/hash";
 import { faker } from "@faker-js/faker";
+import { User } from "@prisma/client";
 
-function createUser() {
+type FakedUser = Omit<User, "id" | "createdAt" | "updatedAt" | "passwordHash">;
+
+function createUser(): FakedUser {
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
   const name = `${firstName} ${lastName}`;
@@ -31,7 +34,9 @@ function createUser() {
   };
 }
 
-export const users = [
+type SeedUser = FakedUser & { passwordHash: string };
+
+export const users: SeedUser[] = [
   {
     ...createUser(),
     passwordHash: hash("password"),
@@ -48,7 +53,7 @@ export const users = [
     name: "Tom Smith",
     email: "tom@autoshop.com",
     phone_number: "(647) 213-3434",
-    year_joined: "2022",
+    year_joined: 2022,
     street: "100 Bremner Ave",
     city: "Toronto",
     province: "Ontario",
