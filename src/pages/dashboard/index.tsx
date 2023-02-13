@@ -50,7 +50,6 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
 type DashboardProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 export default function Dashboard({ user }: DashboardProps) {
-  console.log({ vehicles: user.vehicles });
   return (
     <div>
       <Head>
@@ -69,7 +68,7 @@ export default function Dashboard({ user }: DashboardProps) {
             </div>
           </div>
           <div className="flex w-4/5 flex-col gap-y-10 border p-16">
-            <div className=" p-4 h-full">
+            <div className="p-4 h-full">
               <p className="my-2 font-bold text-xl">Vehicles</p>
               <div className="my-5">
                 {user.vehicles.map((vehicle) => (
@@ -77,7 +76,10 @@ export default function Dashboard({ user }: DashboardProps) {
                 ))}
               </div>
             </div>
-            <div className="border p-4">2</div>
+            <div className="p-4">
+              <p className="my-2 font-bold text-xl">Invoices</p>
+              <div className="my-5"></div>
+            </div>
           </div>
         </div>
       </Layout>

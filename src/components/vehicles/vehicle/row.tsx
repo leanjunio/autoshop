@@ -13,7 +13,7 @@ export default function VehicleRow({ vehicle }: VehicleRowProps) {
   return (
     <div
       onClick={() => goToVehiclePage(vehicle.id)}
-      className="m-5 p-5  rounded-md hover:cursor-pointer hover:bg-accent duration-700"
+      className="my-5 p-5 border rounded-md hover:cursor-pointer hover:bg-accent duration-700"
     >
       <h1 className="font-semibold">
         {vehicle.manufacture_year} {vehicle.manufacturer} {vehicle.model} -{" "}
