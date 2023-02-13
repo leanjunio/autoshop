@@ -34,9 +34,9 @@ function createUser(): FakedUser {
   };
 }
 
-type SeedUser = FakedUser & { passwordHash: string };
+type SanitizedUser = FakedUser & { passwordHash: string };
 
-export const users: SeedUser[] = [
+export const users: SanitizedUser[] = [
   {
     ...createUser(),
     passwordHash: hash("password"),
