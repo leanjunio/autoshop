@@ -6,7 +6,7 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar border-b bg-base-100 px-8">
       <div className="flex-1 gap-x-5">
         <Link className="font-bold normal-case" href="/">
           Autoshop

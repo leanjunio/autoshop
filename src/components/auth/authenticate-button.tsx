@@ -5,14 +5,14 @@ export default function AuthenticateButton() {
 
   if (session) {
     return (
-      <button className="btn btn-outline" onClick={signOut}>
+      <button className="btn btn-ghost" onClick={signOut}>
         Logout
       </button>
     );
   }
 
   return (
-    <button className="btn btn-outline" onClick={signIn}>
+    <button className="btn btn-ghost" onClick={signIn}>
       Login
     </button>
   );
