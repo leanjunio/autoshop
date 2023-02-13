@@ -6,6 +6,7 @@ import Head from "next/head";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { Vehicle } from "@prisma/client";
 import VehicleRow from "@/components/vehicles/vehicle/row";
+import { useRouter } from "next/router";
 
 type ResponseType = {
   user: {
@@ -50,6 +51,11 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
 type DashboardProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 export default function Dashboard({ user }: DashboardProps) {
+  const router = useRouter();
+
+  function goToAddVehiclePage() {
+    router.push(`/vehicles/add`);
+  }
 
   return (
     <div>
@@ -72,7 +78,12 @@ export default function Dashboard({ user }: DashboardProps) {
             <div className="p-4 h-full flex flex-col">
               <div className="flex justify-between">
                 <p className="my-2 font-bold text-xl">Vehicles</p>
-                <button className="btn btn-accent btn-md">Add Vehicle</button>
+                <button
+                  onClick={goToAddVehiclePage}
+                  className="btn btn-accent btn-md"
+                >
+                  Add Vehicle
+                </button>
               </div>
               <div className="my-2">
                 {user.vehicles.map((vehicle) => (
