@@ -44,4 +44,15 @@ export const users = [
     ...createUser(),
     passwordHash: hash("password"),
   },
+  {
+    name: "Tom Smith",
+    email: "tom@autoshop.com",
+    phone_number: "(647) 213-3434",
+    year_joined: "2022",
+    street: "100 Bremner Ave",
+    city: "Toronto",
+    province: "Ontario",
+    postal_code: "M3H 2H3",
+    passwordHash: hash("password"),
+  },
 ];
