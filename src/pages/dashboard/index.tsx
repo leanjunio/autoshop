@@ -50,6 +50,7 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
 type DashboardProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 export default function Dashboard({ user }: DashboardProps) {
+
   return (
     <div>
       <Head>
