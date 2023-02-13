@@ -57,7 +57,7 @@ export default function Dashboard({ user }: DashboardProps) {
       </Head>
       <Layout>
         <div className="flex flex-row">
-          <div className="border w-1/5 py-28 px-24">
+          <div className="w-1/5 py-28 px-24">
             <div>
               <p className="my-2 font-bold text-xl">{user.name}</p>
               <p className="text-sm text-gray-600">{user.phone_number}</p>
@@ -67,10 +67,13 @@ export default function Dashboard({ user }: DashboardProps) {
               </button>
             </div>
           </div>
-          <div className="flex w-4/5 flex-col gap-y-10 border p-16">
-            <div className="p-4 h-full">
-              <p className="my-2 font-bold text-xl">Vehicles</p>
-              <div className="my-5">
+          <div className="flex w-4/5 flex-col gap-y-10 p-16">
+            <div className="p-4 h-full flex flex-col">
+              <div className="flex justify-between">
+                <p className="my-2 font-bold text-xl">Vehicles</p>
+                <button className="btn btn-accent btn-md">Add Vehicle</button>
+              </div>
+              <div className="my-2">
                 {user.vehicles.map((vehicle) => (
                   <VehicleRow key={vehicle.id} vehicle={vehicle} />
                 ))}
