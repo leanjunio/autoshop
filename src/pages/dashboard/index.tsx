@@ -59,6 +59,9 @@ export default function Dashboard({ user }: DashboardProps) {
               <p className="my-2 font-bold text-xl">{user.name}</p>
               <p className="text-sm text-gray-600">{user.phone_number}</p>
               <p className="text-sm text-gray-600">{user.email}</p>
+              <button className="my-5 text-sm btn btn-outline btn-xs border-base-200">
+                Edit Profile
+              </button>
             </div>
           </div>
           <div className="flex w-4/5 flex-col gap-y-10 border p-16">
