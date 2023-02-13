@@ -1,7 +1,15 @@
+import Layout from "@/components/layout";
+import Head from "next/head";
+
 export default function AddVehiclePage() {
   return (
-    <div>
-      <h1>This is the Add Vehicle Page</h1>
-    </div>
+    <>
+      <Head>
+        <title>Add Vehicle</title>
+      </Head>
+      <Layout>
+        <div></div>
+      </Layout>
+    </>
   );
 }
