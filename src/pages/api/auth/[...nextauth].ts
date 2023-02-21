@@ -36,9 +36,11 @@ export const authOptions = {
           user?.passwordHash
         );
 
-        if (isCorrectPassword) {
-          return user;
+        if (!isCorrectPassword) {
+          return null;
         }
+
+        return user;
       },
     }),
   ],
