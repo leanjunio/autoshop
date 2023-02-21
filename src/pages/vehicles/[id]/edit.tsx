@@ -6,6 +6,7 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import router from "next/router";
 
 type ResponseType = {
   vehicle: Vehicle;
@@ -55,7 +56,9 @@ export default function EditVehicle({ vehicle }: EditVehicleProps) {
 
   function onSubmit(data: unknown) {
     console.log(data);
+    router.push(`/dashboard`);
   }
+
   return (
     <>
       <Head>
