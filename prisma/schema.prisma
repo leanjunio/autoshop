@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider          = "mongodb"
-  url               = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -35,21 +35,21 @@ model Vehicle {
 
   // Vehicle specific details
   plate_number      String
-  model             String
+  model             String?
   vin               String
-  manufacturer      String
-  body              String
-  transmission_type String
-  engine_size       Int
-  manufacture_year  Int
-  purchase_year     Int
-  driver_name       String
-  ac                Boolean
+  manufacturer      String?
+  body              String?
+  transmission_type String?
+  engine_size       Int?
+  manufacture_year  Int?
+  purchase_year     Int?
+  driver_name       String?
+  ac                Boolean?
 
   // Finances
   Invoice         Invoice[]
-  avg_yearly_cost String
-  initial_cost    String
+  avg_yearly_cost String?
+  initial_cost    String?
 }
 
 model Invoice {
