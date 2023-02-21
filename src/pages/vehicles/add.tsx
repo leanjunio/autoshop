@@ -10,7 +10,7 @@ const validationSchema = z.object({
   model: z.string().optional(),
   manufacturer: z.string().optional(),
   body: z.string().optional(),
-  transmittion_type: z.string().optional(),
+  transmission_type: z.string().optional(),
   engine_size: z.number().optional(),
   manufacture_year: z.number().optional(),
   purchase_year: z.number().optional(),
@@ -89,9 +89,9 @@ export default function AddVehiclePage() {
                   <label className="label">
                     <span className="label-text">Transmission Type</span>
                   </label>
-                  <input placeholder="e.g Automatic" className="input input-bordered w-full max-w-xs" {...register("transmittion_type")} />
+                  <input placeholder="e.g Automatic" className="input input-bordered w-full max-w-xs" {...register("transmission_type")} />
                   <label className="label">
-                    <span className="label-text-alt text-error">{errors.transmittion_type?.message}</span>
+                    <span className="label-text-alt text-error">{errors.transmission_type?.message}</span>
                   </label>
                 </div>
                 <div className="form-control w-full max-w-xs">
