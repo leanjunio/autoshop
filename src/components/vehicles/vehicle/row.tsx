@@ -7,7 +7,7 @@ type VehicleRowProps = {
 
 export default function VehicleRow({ vehicle }: VehicleRowProps) {
   function goToVehiclePage(id: string) {
-    router.push(`/vehicles/${id}`);
+    router.push(`/vehicles/${id}/edit`);
   }
 
   return (
