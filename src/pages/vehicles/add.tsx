@@ -3,6 +3,8 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 const validationSchema = z.object({
   plate_number: z.string().trim().min(1, 'Plate Number is required'),
@@ -25,8 +27,22 @@ export default function AddVehiclePage() {
     resolver: zodResolver(validationSchema),
   });
 
-  function onSubmit(data: unknown) {
-    console.log(data);
+  const { data: session } = useSession();
+
+  async function onSubmit(data: unknown) {
+    try {
+      await fetch(`/api/vehicles`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: session?.user?.id,
+          vehicle: data
+        })
+      });
+      toast.success('Vehicle added successfully');
+    } catch (error) {
+      toast.error('Something went wrong');
+    }
   }
 
   return (
