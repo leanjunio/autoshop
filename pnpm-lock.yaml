@@ -5,6 +5,7 @@ specifiers:
   '@hookform/resolvers': ^2.9.11
   '@next/font': 13.1.6
   '@ngneat/falso': ^6.4.0
+  '@playwright/test': ^1.30.0
   '@prisma/client': ^4.10.0
   '@types/bcrypt': ^5.0.0
   '@types/node': 18.11.19
@@ -47,6 +48,7 @@ dependencies:
 
 devDependencies:
   '@faker-js/faker': 7.6.0
+  '@playwright/test': 1.30.0
   '@types/bcrypt': 5.0.0
   '@types/node': 18.11.19
   autoprefixer: 10.4.13_postcss@8.4.21
@@ -323,6 +325,15 @@ packages:
       tiny-glob: 0.2.9
       tslib: 2.5.0
     dev: false
+
+  /@playwright/test/1.30.0:
+    resolution: {integrity: sha512-SVxkQw1xvn/Wk/EvBnqWIq6NLo1AppwbYOjNLmyU0R1RoQ3rLEBtmjTnElcnz8VEtn11fptj1ECxK0tgURhajw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dependencies:
+      '@types/node': 18.11.19
+      playwright-core: 1.30.0
+    dev: true
 
   /@prisma/client/4.10.0_prisma@4.9.0:
     resolution: {integrity: sha512-sBmYb1S6SMKFIESaLMfKqWSalv3pH73cMCsFt9HslJvYjIIcKQCA6PDL2O4SZGWvc4JBef9cg5Gd7d9x3AtKjw==}
@@ -2289,6 +2300,12 @@ packages:
   /pify/2.3.0:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
+
+  /playwright-core/1.30.0:
+    resolution: {integrity: sha512-7AnRmTCf+GVYhHbLJsGUtskWTE33SwMZkybJ0v6rqR1boxq2x36U7p1vDRV7HO2IwTZgmycracLxPEJI49wu4g==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /postcss-import/14.1.0_postcss@8.4.21:
     resolution: {integrity: sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw==}
