@@ -36,10 +36,10 @@ export default function AddVehiclePage() {
       </Head>
       <Layout>
         <div className="flex justify-center">
-          <div className="w-2/4 p-5">
+          <div className="p-5">
             <form onSubmit={handleSubmit(onSubmit)}>
               <h1 className="text-3xl font-bold my-6">Add Vehicle</h1>
-              <div className="grid grid-cols-2">
+              <div className="grid grid-cols-2 gap-x-32">
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">VIN Number</span>
@@ -136,9 +136,9 @@ export default function AddVehiclePage() {
                     <span className="label-text-alt text-error">{errors.driver_name?.message}</span>
                   </label>
                 </div>
-              </div>
-              <div className="form-control mt-10 w-1/5">
-                <button className="btn btn-active btn-accent">Add Vehicle</button>
+                <div className="form-control mt-10">
+                  <button className="btn btn-wide btn-active btn-accent">Add Vehicle</button>
+                </div>
               </div>
             </form>
           </div>
