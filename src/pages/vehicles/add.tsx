@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 const validationSchema = z.object({
-  plate_number: z.string(),
-  vin: z.string(),
+  plate_number: z.string().trim().min(1, 'Plate Number is required'),
+  vin: z.string().trim().min(1, 'VIN Number is required'),
   model: z.string().optional(),
   manufacturer: z.string().optional(),
   body: z.string().optional(),
@@ -21,7 +21,7 @@ const validationSchema = z.object({
 type FormData = z.infer<typeof validationSchema>;
 
 export default function AddVehiclePage() {
-  const { register, handleSubmit } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(validationSchema),
   });
 
@@ -44,65 +44,101 @@ export default function AddVehiclePage() {
                   <label className="label">
                     <span className="label-text">VIN Number</span>
                   </label>
-                  <input type="text" placeholder="Enter VIN Number" className="input input-bordered w-full max-w-xs" {...register("vin")} />
+                  <input placeholder="Enter VIN Number" className="input input-bordered w-full max-w-xs" {...register("vin")} />
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.vin?.message}</span>
+                  </label>
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Plate Number</span>
                   </label>
-                  <input type="text" placeholder="Enter Plate Number" className="input input-bordered w-full max-w-xs" {...register("plate_number")} />
+                  <input placeholder="Enter Plate Number" className="input input-bordered w-full max-w-xs" {...register("plate_number")} />
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.plate_number?.message}</span>
+                  </label>
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Vehicle Manufacturer</span>
                   </label>
-                  <input type="text" placeholder="e.g Toyota" className="input input-bordered w-full max-w-xs" {...register("manufacturer")} />
+                  <input placeholder="e.g Toyota" className="input input-bordered w-full max-w-xs" {...register("manufacturer")} />
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.manufacturer?.message}</span>
+                  </label>
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Vehicle Model</span>
                   </label>
-                  <input type="text" placeholder="e.g Corrolla" className="input input-bordered w-full max-w-xs" {...register("model")} />
+                  <input placeholder="e.g Corrolla" className="input input-bordered w-full max-w-xs" {...register("model")} />
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.model?.message}</span>
+                  </label>
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Vehicle Body</span>
                   </label>
-                  <input type="text" placeholder="e.g Sedan" className="input input-bordered w-full max-w-xs" {...register("body")} />
+                  <input placeholder="e.g Sedan" className="input input-bordered w-full max-w-xs" {...register("body")} />
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.body?.message}</span>
+                  </label>
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Transmission Type</span>
                   </label>
-                  <input type="text" placeholder="e.g Automatic" className="input input-bordered w-full max-w-xs" {...register("transmittion_type")} />
+                  <input placeholder="e.g Automatic" className="input input-bordered w-full max-w-xs" {...register("transmittion_type")} />
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.transmittion_type?.message}</span>
+                  </label>
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Engine Size (Litres)</span>
                   </label>
-                  <input type="text" placeholder="e.g 8.2" className="input input-bordered w-full max-w-xs" {...register("engine_size")} />
+                  <input placeholder="e.g 8.2" className="input input-bordered w-full max-w-xs" {...register("engine_size", {
+                    valueAsNumber: true,
+                  })} />
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.engine_size?.message}</span>
+                  </label>
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Year Manufactured</span>
                   </label>
-                  <input type="text" placeholder="e.g 2005" className="input input-bordered w-full max-w-xs" {...register("manufacture_year")} />
+                  <input placeholder="e.g 2005" className="input input-bordered w-full max-w-xs" {...register("manufacture_year", {
+                    valueAsNumber: true,
+                  })} />
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.manufacture_year?.message}</span>
+                  </label>
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Year Purchased</span>
                   </label>
-                  <input type="text" placeholder="e.g 2020" className="input input-bordered w-full max-w-xs" {...register("purchase_year")} />
+                  <input placeholder="e.g 2020" className="input input-bordered w-full max-w-xs" {...register("purchase_year", {
+                    valueAsNumber: true,
+                  })} />
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.purchase_year?.message}</span>
+                  </label>
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Driver Name</span>
                   </label>
-                  <input type="text" placeholder="e.g Max Thomas" className="input input-bordered w-full max-w-xs" {...register("driver_name")} />
+                  <input placeholder="e.g Max Thomas" className="input input-bordered w-full max-w-xs" {...register("driver_name")} />
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.driver_name?.message}</span>
+                  </label>
                 </div>
               </div>
               <div className="form-control mt-10 w-1/5">
-                <button className="btn btn-active btn-accent" type="submit">Add Vehicle</button>
+                <button className="btn btn-active btn-accent">Add Vehicle</button>
               </div>
             </form>
           </div>
