@@ -2,8 +2,18 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth/next";
 import prisma from "@/lib/prisma";
 import { compare } from "@/utils/hash";
+import { AuthOptions } from "next-auth";
 
-export const authOptions = {
+export const authOptions: AuthOptions = {
+  callbacks: {
+    async session({ session, token, user }) {
+      // Send properties to the client, like an access_token and user id from a provider.
+      (session as any).accessToken = token.accessToken as any
+      (session as any).user.id = token.id
+
+      return session
+    }
+  },
   providers: [
     CredentialsProvider({
       name: "Credentials",
