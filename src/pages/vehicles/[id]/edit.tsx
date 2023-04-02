@@ -35,15 +35,15 @@ type EditVehicleProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 const validationSchema = z.object({
   plate_number: z.string().trim().min(1, 'Required'),
   vin: z.string().trim().min(1, 'Required'),
-  model: z.string().trim().min(1, 'Required').optional(),
-  manufacturer: z.string().trim().min(1, 'Required').optional(),
-  body: z.string().trim().min(1, 'Required').optional(),
-  transmission_type: z.string().trim().min(1, 'Required').optional(),
-  engine_size: z.number(),
-  manufacture_year: z.number(),
-  purchase_year: z.number(),
-  driver_name: z.string().optional(),
-  ac: z.boolean().optional(),
+  model: z.string().nullable(),
+  manufacturer: z.string().nullable(),
+  body: z.string().nullable(),
+  transmission_type: z.string().nullable(),
+  engine_size: z.number().nullable(),
+  manufacture_year: z.number().nullable(),
+  purchase_year: z.number().nullable(),
+  driver_name: z.string().nullable(),
+  ac: z.boolean().nullable(),
 });
 
 type FormData = z.infer<typeof validationSchema>;
@@ -55,6 +55,7 @@ export default function EditVehicle({ vehicle }: EditVehicleProps) {
   });
 
   function onSubmit(data: unknown) {
+    // TODO: send update vehicle request
     console.log(data);
     router.push(`/dashboard`);
   }
