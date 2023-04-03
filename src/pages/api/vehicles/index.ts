@@ -9,8 +9,6 @@ export default async function handler(
 ) {
   switch (req.method) {
     case "POST": {
-      console.log({ body: req.body });
-
       const vehicle = await prisma.vehicle.create({ data: req.body.vehicle });
       await prisma.user.update({
         where: {
