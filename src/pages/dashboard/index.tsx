@@ -4,9 +4,10 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { getServerSession } from "next-auth";
 import Head from "next/head";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { Vehicle } from "@prisma/client";
+import { Invoice, Vehicle } from "@prisma/client";
 import VehicleRow from "@/components/vehicles/vehicle/row";
 import { useRouter } from "next/router";
+import InvoiceRow from "@/components/invoices/row";
 
 type ResponseType = {
   user: {
@@ -15,6 +16,7 @@ type ResponseType = {
     phone_number: string;
     vehicles: Vehicle[];
   };
+  invoices: Invoice[]
 };
 
 export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
@@ -28,7 +30,16 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
       where: {
         email: session.user.email,
       },
-      select: { name: true, email: true, phone_number: true, vehicles: true },
+      select: {
+        name: true,
+        email: true,
+        phone_number: true,
+        vehicles: {
+          include: {
+            invoices: true
+          }
+        }
+      }
     });
 
     if (!user) {
@@ -37,7 +48,9 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
       };
     }
 
-    return { props: { user } };
+    const invoices = user.vehicles.map(vehicle => vehicle.invoices).flat();
+
+    return { props: { user, invoices } };
   }
 
   return {
@@ -50,7 +63,7 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
 
 type DashboardProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-export default function Dashboard({ user }: DashboardProps) {
+export default function Dashboard({ user, invoices }: DashboardProps) {
   const router = useRouter();
 
   function goToAddVehiclePage() {
@@ -106,7 +119,9 @@ export default function Dashboard({ user }: DashboardProps) {
                 </button>
               </div>
               <div className="my-2">
-                {/* TODO: Display invoices */}
+                {invoices.map((invoice) => (
+                  <InvoiceRow key={invoice.id} invoice={invoice} />
+                ))}
               </div>
             </div>
           </div>
