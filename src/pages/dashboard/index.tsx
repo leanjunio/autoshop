@@ -90,11 +90,11 @@ export default function Dashboard({ user, invoices }: DashboardProps) {
               <p className="my-2 font-bold text-xl">{user.name}</p>
               <p className="text-sm text-gray-600">{user.phone_number}</p>
               <p className="text-sm text-gray-600">{user.email}</p>
-              <button onClick={goToReportsPage} className="my-5 text-sm btn btn-outline btn-xs border-base-200">
+              <button className="my-5 text-sm btn btn-outline btn-xs border-base-200">
                 Edit Profile
               </button>
             </div>
-            <button className="btn btn-outline btn-accent">View Reports</button>
+            <button onClick={goToReportsPage} className="btn btn-outline btn-accent">View Reports</button>
           </div>
           <div className="flex w-4/5 flex-col gap-y-10 p-16">
             <div className="p-4 h-full flex flex-col">
