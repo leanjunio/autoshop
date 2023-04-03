@@ -120,7 +120,7 @@ export default function Dashboard({ user, invoices }: DashboardProps) {
               </div>
               <div className="my-2">
                 {invoices.map((invoice) => (
-                  <InvoiceRow key={invoice.id} invoice={invoice} />
+                  <InvoiceRow key={invoice.id} invoice={invoice} vehicle={user.vehicles.find(v => v.id === invoice.vehicleId) as Vehicle} />
                 ))}
               </div>
             </div>

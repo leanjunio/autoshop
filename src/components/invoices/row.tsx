@@ -1,11 +1,12 @@
-import { Invoice } from "@prisma/client";
+import { Invoice, Vehicle } from "@prisma/client";
 import router from "next/router";
 
 type InvoiceRowProps = {
   invoice: Invoice;
+  vehicle: Vehicle;
 };
 
-export default function InvoiceRow({ invoice }: InvoiceRowProps) {
+export default function InvoiceRow({ invoice, vehicle }: InvoiceRowProps) {
   function goToInvoicePage(id: string) {
     router.push(`/invoices/${id}/edit`);
   }
@@ -16,9 +17,12 @@ export default function InvoiceRow({ invoice }: InvoiceRowProps) {
       className="my-5 p-5 border rounded-md hover:cursor-pointer hover:bg-accent duration-700"
     >
       <h1 className="font-semibold">
-        Invoice # {invoice.vehicleId}
+        Invoice # {invoice.id}
       </h1>
-      <p>$ {invoice.total_cost}</p>
+      <div className="flex gap-x-5">
+        <p><b>Vehicle:</b> {vehicle.manufacture_year} {vehicle.manufacturer} {vehicle.model} - {vehicle.plate_number}</p>
+        <p><b>Total Cost:</b>${invoice.total_cost}</p>
+      </div>
     </div>
   );
 }

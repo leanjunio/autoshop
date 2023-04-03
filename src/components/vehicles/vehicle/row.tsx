@@ -16,8 +16,7 @@ export default function VehicleRow({ vehicle }: VehicleRowProps) {
       className="my-5 p-5 border rounded-md hover:cursor-pointer hover:bg-accent duration-700"
     >
       <h1 className="font-semibold">
-        {vehicle.manufacture_year} {vehicle.manufacturer} {vehicle.model} -{" "}
-        {vehicle.plate_number}
+        {vehicle.manufacture_year} {vehicle.manufacturer} {vehicle.model} - {vehicle.plate_number}
       </h1>
       <p>{vehicle.vin}</p>
     </div>
