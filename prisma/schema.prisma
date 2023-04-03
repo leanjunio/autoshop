@@ -40,14 +40,14 @@ model Vehicle {
   manufacturer      String?
   body              String?
   transmission_type String?
-  engine_size       Int?
+  engine_size       Float?
   manufacture_year  Int?
   purchase_year     Int?
   driver_name       String?
   ac                Boolean?
 
   // Finances
-  Invoice         Invoice[]
+  invoices        Invoice[]
   avg_yearly_cost String?
   initial_cost    String?
 }
