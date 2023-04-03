@@ -9,22 +9,14 @@ export default async function handler(
 ) {
   switch (req.method) {
     case "PUT": {
-      console.log("reached api")
-      // const vehicle = await prisma.vehicle.create({ data: req.body.vehicle });
-      // await prisma.user.update({
-      //   where: {
-      //     id: req.body.userId
-      //   },
-      //   data: {
-      //     vehicles: {
-      //       connect: {
-      //         id: vehicle.id
-      //       }
-      //     }
-      //   }
-      // });
+      const updated = await prisma.vehicle.update({
+        where: {
+          id: req.query.id as string
+        },
+        data: req.body.updates
+      });
 
-      // res.status(200).json({ message: 'Successfully added vehicle', vehicle })
+      res.status(200).json({ message: 'Successfully updated vehicle', vehicle: updated })
     }
   }
 }

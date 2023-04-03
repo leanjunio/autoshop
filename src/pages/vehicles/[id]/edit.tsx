@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import router from "next/router";
+import toast from "react-hot-toast";
 
 type ResponseType = {
   vehicle: Vehicle;
@@ -33,6 +34,7 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
 type EditVehicleProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 const validationSchema = z.object({
+  id: z.string(),
   plate_number: z.string().trim().min(1, 'Required'),
   vin: z.string().trim().min(1, 'Required'),
   model: z.string().nullable(),
@@ -54,10 +56,21 @@ export default function EditVehicle({ vehicle }: EditVehicleProps) {
     defaultValues: vehicle
   });
 
-  function onSubmit(data: unknown) {
-    // TODO: send update vehicle request
-    console.log(data);
-    router.push(`/dashboard`);
+  async function onSubmit({ id, ...updates }: FormData) {
+    try {
+      await fetch(`/api/vehicles/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          updates,
+        })
+      });
+      toast.success('Vehicle updated');
+    } catch (error) {
+      toast.error('Something went wrong');
+    } finally {
+      router.push(`/dashboard`);
+    }
   }
 
   return (
