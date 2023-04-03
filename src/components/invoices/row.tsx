@@ -21,7 +21,7 @@ export default function InvoiceRow({ invoice, vehicle }: InvoiceRowProps) {
       </h1>
       <div className="flex gap-x-5">
         <p><b>Vehicle:</b> {vehicle.manufacture_year} {vehicle.manufacturer} {vehicle.model} - {vehicle.plate_number}</p>
-        <p><b>Total Cost:</b>${invoice.total_cost}</p>
+        <p><b>Total Cost:</b> ${invoice.total_cost}</p>
       </div>
     </div>
   );
