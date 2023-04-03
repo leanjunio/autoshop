@@ -57,4 +57,5 @@ model Invoice {
   total_cost Float
   Vehicle    Vehicle? @relation(fields: [vehicleId], references: [id])
   vehicleId  String?  @db.ObjectId
+  date       String
 }
