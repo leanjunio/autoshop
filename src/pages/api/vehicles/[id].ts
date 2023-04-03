@@ -16,7 +16,7 @@ export default async function handler(
         data: req.body.updates
       });
 
-      res.status(200).json({ message: 'Successfully updated vehicle', vehicle: updated })
+      return res.status(200).json({ message: 'Successfully updated vehicle', vehicle: updated })
     }
 
     case "DELETE": {
@@ -26,7 +26,7 @@ export default async function handler(
         }
       });
 
-      res.status(200).json({ message: 'Successfully deleted vehicle', vehicle: deleted })
+      return res.status(200).json({ message: 'Successfully deleted vehicle', vehicle: deleted })
     }
   }
 }
