@@ -1,5 +1,6 @@
 import { Invoice, Vehicle } from "@prisma/client";
 import router from "next/router";
+import format from "date-fns/format";
 
 type InvoiceRowProps = {
   invoice: Invoice;
@@ -22,6 +23,7 @@ export default function InvoiceRow({ invoice, vehicle }: InvoiceRowProps) {
       <div className="flex gap-x-5">
         <p><b>Vehicle:</b> {vehicle.manufacture_year} {vehicle.manufacturer} {vehicle.model} - {vehicle.plate_number}</p>
         <p><b>Total Cost:</b> ${invoice.total_cost}</p>
+        <p><b>Date:</b> {format(new Date(invoice.date), "MMM dd yyyy")}</p>
       </div>
     </div>
   );

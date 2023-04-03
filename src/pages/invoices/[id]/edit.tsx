@@ -1,12 +1,11 @@
 import Layout from "@/components/layout";
 import Head from "next/head";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import { z } from "zod";
 import toast from "react-hot-toast";
-import { useSession } from "next-auth/react";
 import router from "next/router";
 import { Invoice, Vehicle } from "@prisma/client";
 import prisma from "@/lib/prisma";
@@ -15,7 +14,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 const validationSchema = z.object({
   id: z.string(),
   total_cost: z.number().positive(),
-  vehicle: z.string(),
+  vehicleId: z.string(),
   date: z.string(),
 });
 
@@ -77,10 +76,10 @@ export default function EditInvoicePage({ vehicles, invoice }: EditInvoicePagePr
   console.log({
     invoice
   })
-  const { register, handleSubmit, formState: { errors, defaultValues }, control } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues: {
       ...invoice,
-      vehicle: invoice.vehicleId as string,
+      vehicleId: invoice.vehicleId as string,
       date: invoice.date.substring(0, 10),
     },
     resolver: zodResolver(validationSchema),
@@ -89,7 +88,7 @@ export default function EditInvoicePage({ vehicles, invoice }: EditInvoicePagePr
   async function onSubmit({ id, ...updates }: FormData) {
     try {
       await fetch(`/api/invoices/${id}`, {
-        method: 'POST',
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           invoice: updates,
@@ -129,29 +128,27 @@ export default function EditInvoicePage({ vehicles, invoice }: EditInvoicePagePr
                   <label className="label">
                     <span className="label-text">Vehicle</span>
                   </label>
-                  <select className="select select-bordered w-full max-w-xs" {...register("vehicle")}>
+                  <select className="select select-bordered w-full max-w-xs" {...register("vehicleId")}>
                     <option disabled selected>Choose vehicle</option>
                     {vehicles.map((vehicle) => (
                       <option key={vehicle.id} value={vehicle.id}>{vehicle.manufacturer} {vehicle.model}</option>
                     ))}
                   </select>
                   <label className="label">
-                    <span className="label-text-alt text-error">{errors.vehicle?.message}</span>
+                    <span className="label-text-alt text-error">{errors.vehicleId?.message}</span>
                   </label>
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Date</span>
                   </label>
-                  <input placeholder="i.e 500" className="input input-bordered w-full max-w-xs" type="date" {...register("date", {
-                    valueAsDate: true,
-                  })} />
+                  <input placeholder="i.e 500" className="input input-bordered w-full max-w-xs" type="date" {...register("date")} />
                   <label className="label">
                     <span className="label-text-alt text-error">{errors.date?.message}</span>
                   </label>
                 </div>
                 <div className="form-control mt-10">
-                  <button className="btn btn-wide btn-active btn-accent">Add Invoice</button>
+                  <button className="btn btn-wide btn-active btn-accent">Update Invoice</button>
                 </div>
               </div>
             </form>
