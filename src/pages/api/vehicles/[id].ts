@@ -18,5 +18,15 @@ export default async function handler(
 
       res.status(200).json({ message: 'Successfully updated vehicle', vehicle: updated })
     }
+
+    case "DELETE": {
+      const deleted = await prisma.vehicle.delete({
+        where: {
+          id: req.query.id as string
+        }
+      });
+
+      res.status(200).json({ message: 'Successfully deleted vehicle', vehicle: deleted })
+    }
   }
 }

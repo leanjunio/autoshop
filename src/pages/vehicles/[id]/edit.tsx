@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import router from "next/router";
 import toast from "react-hot-toast";
+import { useRef } from "react";
 
 type ResponseType = {
   vehicle: Vehicle;
@@ -55,6 +56,7 @@ export default function EditVehicle({ vehicle }: EditVehicleProps) {
     resolver: zodResolver(validationSchema),
     defaultValues: vehicle
   });
+  const ref = useRef<HTMLInputElement>(null);
 
   async function onSubmit({ id, ...updates }: FormData) {
     try {
@@ -70,6 +72,23 @@ export default function EditVehicle({ vehicle }: EditVehicleProps) {
       toast.error('Something went wrong');
     } finally {
       router.push(`/dashboard`);
+    }
+  }
+
+  async function onDelete() {
+    try {
+      await fetch(`/api/vehicles/${vehicle.id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      toast.success('Vehicle removed');
+    } catch (error) {
+      toast.error('Something went wrong');
+    } finally {
+      if (ref.current) {
+        ref.current.checked = false;
+        router.push(`/dashboard`);
+      }
     }
   }
 
@@ -183,11 +202,25 @@ export default function EditVehicle({ vehicle }: EditVehicleProps) {
                 <div className="form-control mt-10">
                   <button className="btn btn-wide btn-active btn-accent">Update Vehicle</button>
                 </div>
+                <div className="form-control mt-10">
+                  <label htmlFor="my-modal" className="btn btn-wide btn-active btn-secondary">Delete Vehicle</label>
+                </div>
               </div>
             </form>
           </div>
         </div>
       </Layout>
+      <input type="checkbox" ref={ref} id="my-modal" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Delete Confirmation</h3>
+          <p className="py-4">Are you sure you want to delete this vehicle?</p>
+          <div className="modal-action">
+            <button onClick={onDelete} type="button" className="btn btn-secondary">Delete</button>
+            <label htmlFor="my-modal" className="btn btn-outline">Cancel</label>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
