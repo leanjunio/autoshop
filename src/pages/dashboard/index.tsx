@@ -57,6 +57,10 @@ export default function Dashboard({ user }: DashboardProps) {
     router.push(`/vehicles/add`);
   }
 
+  function goToAddInvoicePage() {
+    router.push(`/invoices/add`);
+  }
+
   return (
     <div>
       <Head>
@@ -91,9 +95,19 @@ export default function Dashboard({ user }: DashboardProps) {
                 ))}
               </div>
             </div>
-            <div className="p-4">
-              <p className="my-2 font-bold text-xl">Invoices</p>
-              <div className="my-5"></div>
+            <div className="p-4 h-full flex flex-col">
+              <div className="flex justify-between">
+                <p className="my-2 font-bold text-xl">Invoices</p>
+                <button
+                  onClick={goToAddInvoicePage}
+                  className="btn btn-accent btn-md"
+                >
+                  Add Invoice
+                </button>
+              </div>
+              <div className="my-2">
+                {/* TODO: Display invoices */}
+              </div>
             </div>
           </div>
         </div>
