@@ -8,11 +8,13 @@ export default async function handler(
   res: NextApiResponse<{ message: string, vehicle: Vehicle }>
 ) {
   switch (req.method) {
-    case "POST":
+    case "POST": {
+      console.log({ body: req.body });
+
       const vehicle = await prisma.vehicle.create({ data: req.body.vehicle });
       await prisma.user.update({
         where: {
-          id: req.body.userId
+          email: req.body.userId
         },
         data: {
           vehicles: {
@@ -24,5 +26,6 @@ export default async function handler(
       });
 
       res.status(200).json({ message: 'Successfully added vehicle', vehicle })
+    }
   }
 }
