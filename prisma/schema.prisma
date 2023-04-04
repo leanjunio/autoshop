@@ -10,6 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 model User {
   id           String    @id @default(auto()) @map("_id") @db.ObjectId
   name         String
@@ -20,6 +25,7 @@ model User {
   passwordHash String
   phone_number String
   year_joined  Int
+  role         Role      @default(USER)
 
   // Location information
   street      String

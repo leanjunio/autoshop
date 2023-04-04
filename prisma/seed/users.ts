@@ -31,6 +31,7 @@ function createUser(): FakedUser {
     city,
     province,
     postal_code,
+    role: "USER",
   };
 }
 
@@ -59,5 +60,6 @@ export const users: SanitizedUser[] = [
     province: "Ontario",
     postal_code: "M3H 2H3",
     passwordHash: hash("password"),
+    role: "ADMIN"
   },
 ];
