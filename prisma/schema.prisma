@@ -15,6 +15,11 @@ enum Role {
   USER
 }
 
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
 model User {
   id           String    @id @default(auto()) @map("_id") @db.ObjectId
   name         String
@@ -24,14 +29,19 @@ model User {
   vehicles     Vehicle[]
   passwordHash String
   phone_number String
-  year_joined  Int
+  year_joined  Int?
   role         Role      @default(USER)
+  status       Status    @default(ACTIVE)
+  notes        String?
 
   // Location information
-  street      String
-  city        String
-  province    String
-  postal_code String
+  street      String?
+  city        String?
+  province    String?
+  postal_code String?
+
+  // Finances
+  discount Float?
 }
 
 model Vehicle {

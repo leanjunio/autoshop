@@ -21,6 +21,8 @@ function createUser(): FakedUser {
   const city = faker.address.cityName();
   const province = faker.address.state();
   const postal_code = faker.address.zipCode();
+  const notes = faker.lorem.paragraph();
+  const discount = faker.datatype.float({ max: 100, precision: 0.01 });
 
   return {
     name,
@@ -32,6 +34,9 @@ function createUser(): FakedUser {
     province,
     postal_code,
     role: "USER",
+    status: "ACTIVE",
+    discount,
+    notes,
   };
 }
 
@@ -60,6 +65,9 @@ export const users: SanitizedUser[] = [
     province: "Ontario",
     postal_code: "M3H 2H3",
     passwordHash: hash("password"),
-    role: "ADMIN"
+    role: "ADMIN",
+    status: "ACTIVE",
+    discount: null,
+    notes: null,
   },
 ];
