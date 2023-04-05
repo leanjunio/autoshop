@@ -4,14 +4,10 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { getServerSession } from "next-auth";
 import Head from "next/head";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { Invoice, User, Vehicle } from "@prisma/client";
-import VehicleRow from "@/components/vehicles/vehicle/row";
-import { useRouter } from "next/router";
-import InvoiceRow from "@/components/invoices/row";
 import { useSession } from "next-auth/react";
 import Sidebar from "@/components/sidebar";
-
-type BasicUser = Pick<User, "name" | "phone_number" | "email">;
+import { BasicUser } from "@/utils/types/users";
+import UsersTable from "@/components/table/users";
 
 type ResponseType = {
   currentUser: BasicUser;
@@ -30,6 +26,8 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
         email: session.user.email,
       },
       select: {
+        id: true,
+        status: true,
         name: true,
         email: true,
         role: true,
@@ -48,6 +46,7 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
           role: "USER",
         },
         select: {
+          id: true,
           name: true,
           phone_number: true,
           email: true,
@@ -98,17 +97,15 @@ export default function AdminDashboard({ currentUser, users }: DashboardProps) {
             <div className="flex w-4/5 flex-col gap-y-10 p-16">
               <div className="p-4 h-full flex flex-col">
                 <div className="flex justify-between">
-                  <p className="my-2 font-bold text-xl">Customers</p>
+                  <p className="my-2 font-bold text-xl">Users</p>
                   <button
                     className="btn btn-accent btn-md"
                   >
-                    Add Customer
+                    Add User
                   </button>
                 </div>
-                <div className="my-2">
-                  {/* {user.vehicles.map((vehicle) => (
-                    <VehicleRow key={vehicle.id} vehicle={vehicle} />
-                  ))} */}
+                <div className="mt-10">
+                  <UsersTable users={users} />
                 </div>
               </div>
             </div>

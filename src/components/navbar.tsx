@@ -6,7 +6,6 @@ export default function Navbar() {
   const { data: session, status } = useSession();
 
   if (status === "authenticated") {
-    console.log({ navbar: session })
     return (
       <div className="navbar border-b bg-base-100 px-8">
         <div className="flex-1 gap-x-5">
