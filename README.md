@@ -12,7 +12,7 @@ If you create changes to the prisma schema, make sure to run `npx prisma db push
 
 ### Starting the app
 
-`npm run dev`
+`npm run local`
 
 ### Environment Variables
 

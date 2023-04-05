@@ -18,7 +18,7 @@ specifiers:
   eslint: 8.33.0
   eslint-config-next: 13.1.6
   next: 13.1.6
-  next-auth: ^4.19.2
+  next-auth: ^4.21.1
   postcss: ^8.4.21
   prisma: ^4.9.0
   react: 18.2.0
@@ -43,7 +43,7 @@ dependencies:
   eslint: 8.33.0
   eslint-config-next: 13.1.6_4vsywjlpuriuw3tl5oq6zy5a64
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
-  next-auth: 4.19.2_3vryta7zmbcsw4rrqf4axjqggm
+  next-auth: 4.21.1_3vryta7zmbcsw4rrqf4axjqggm
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.43.1_react@18.2.0
@@ -2028,8 +2028,8 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: false
 
-  /next-auth/4.19.2_3vryta7zmbcsw4rrqf4axjqggm:
-    resolution: {integrity: sha512-6V2YG3IJQVhgCAH7mvT3yopTW92gMdUrcwGX7NQ0dCreT/+axGua/JmVdarjec0C/oJukKpIYRgjMlV+L5ZQOQ==}
+  /next-auth/4.21.1_3vryta7zmbcsw4rrqf4axjqggm:
+    resolution: {integrity: sha512-NYkU4jAPSVxWhCblE8dDFAnKM7kOoO/QEobQ0RoEVP9Wox99A3PKHwOAsWhSg8ahJG/iKIWk2Bo1xHvsS4R39Q==}
     peerDependencies:
       next: ^12.2.5 || ^13
       nodemailer: ^6.6.5

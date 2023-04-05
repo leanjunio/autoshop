@@ -6,11 +6,21 @@ import { AuthOptions } from "next-auth";
 
 export const authOptions: AuthOptions = {
   callbacks: {
+    async jwt({ token, user }) {
+      // Add auth_time to token on signin in
+      if (user) {
+        token.role = (user as any).role;
+      }
+      return token;
+    },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token and user id from a provider.
-      (session as any).accessToken = token.accessToken as any
-      (session as any).user.id = token.id
+      (session as any).accessToken = token.accessToken as any;
+      (session as any).user.id = token.id;
 
+      if (token && session.user) {
+        (session.user as any).role = token.role;
+      }
       return session
     }
   },

@@ -8,6 +8,8 @@ import { Invoice, Vehicle } from "@prisma/client";
 import VehicleRow from "@/components/vehicles/vehicle/row";
 import { useRouter } from "next/router";
 import InvoiceRow from "@/components/invoices/row";
+import { useSession } from "next-auth/react";
+import Sidebar from "@/components/sidebar";
 
 type ResponseType = {
   user: {
@@ -64,6 +66,9 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
 type DashboardProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 export default function Dashboard({ user, invoices }: DashboardProps) {
+  const { data: session } = useSession();
+
+
   const router = useRouter();
 
   function goToAddVehiclePage() {
@@ -74,10 +79,6 @@ export default function Dashboard({ user, invoices }: DashboardProps) {
     router.push(`/invoices/add`);
   }
 
-  function goToReportsPage() {
-    router.push(`/reports`);
-  }
-
   return (
     <div>
       <Head>
@@ -85,17 +86,7 @@ export default function Dashboard({ user, invoices }: DashboardProps) {
       </Head>
       <Layout>
         <div className="flex flex-row">
-          <div className="w-1/5 py-28 px-24 flex flex-col gap-y-10">
-            <div>
-              <p className="my-2 font-bold text-xl">{user.name}</p>
-              <p className="text-sm text-gray-600">{user.phone_number}</p>
-              <p className="text-sm text-gray-600">{user.email}</p>
-              <button className="my-5 text-sm btn btn-outline btn-xs border-base-200">
-                Edit Profile
-              </button>
-            </div>
-            <button onClick={goToReportsPage} className="btn btn-outline btn-accent">View Reports</button>
-          </div>
+          <Sidebar user={user} />
           <div className="flex w-4/5 flex-col gap-y-10 p-16">
             <div className="p-4 h-full flex flex-col">
               <div className="flex justify-between">
