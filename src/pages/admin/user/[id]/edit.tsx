@@ -41,32 +41,34 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({ req
         email: session.user.email,
       },
       select: {
-        name: true, email: true, phone_number: true, status: true, id: true
+        name: true, email: true, phone_number: true, status: true, id: true, role: true
       },
     });
 
-    const user = await prisma.user.findUnique({
-      where: {
-        id: query.id as string,
-      },
-      select: {
-        name: true, email: true, phone_number: true, status: true, id: true,
-        year_joined: true, notes: true, street: true, city: true, province: true, postal_code: true, discount: true
+    if (currentUser && currentUser.role === "ADMIN") {
+      const user = await prisma.user.findUnique({
+        where: {
+          id: query.id as string,
+        },
+        select: {
+          name: true, email: true, phone_number: true, status: true, id: true,
+          year_joined: true, notes: true, street: true, city: true, province: true, postal_code: true, discount: true
+        }
+      });
+
+      if (!user) {
+        return {
+          notFound: true,
+        };
       }
-    });
 
-    if (!currentUser || !user) {
-      return {
-        notFound: true,
-      };
+      return { props: { user } };
     }
-
-    return { props: { user } };
   }
 
   return {
     redirect: {
-      destination: "/",
+      destination: "/dashboard",
       permanent: false,
     },
   };
