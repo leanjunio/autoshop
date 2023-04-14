@@ -110,7 +110,7 @@ export default function EditInvoicePage({ vehicles, invoice }: EditInvoicePagePr
           <div className="p-5">
             <form onSubmit={handleSubmit(onSubmit)}>
               <h1 className="text-3xl font-bold my-6">Update Invoice</h1>
-              <div className="grid grid-cols-2 gap-x-32">
+              <div className="grid grid-cols-2 gap-x-10">
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Total Cost</span>
