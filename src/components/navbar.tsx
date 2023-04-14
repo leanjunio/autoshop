@@ -24,9 +24,6 @@ export default function Navbar() {
             <Link href="/dashboard">Dashboard</Link>
           </li>
           <li>
-            <Link href="/reports">Reports</Link>
-          </li>
-          <li>
             <AuthenticateButton />
           </li>
         </ul>

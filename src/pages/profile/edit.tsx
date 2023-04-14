@@ -1,7 +1,5 @@
 import Layout from "@/components/layout";
-import VehicleRow from "@/components/vehicles/vehicle/row";
 import prisma from "@/lib/prisma";
-import { User, Vehicle } from "@prisma/client";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
@@ -82,9 +80,10 @@ export default function EditProfilePage({ user }: EditVehiclePageProps) {
     defaultValues: user
   });
 
-  function onSubmit(e) {
+  function onSubmit(e: FormData) {
     console.log(e);
   }
+
   return (
     <>
       <Head>
