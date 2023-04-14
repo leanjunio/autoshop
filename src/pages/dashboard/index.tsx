@@ -68,7 +68,6 @@ type DashboardProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 export default function Dashboard({ user, invoices }: DashboardProps) {
   const { data: session } = useSession();
 
-
   const router = useRouter();
 
   function goToAddVehiclePage() {
