@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <div className="navbar border-b bg-base-100 px-8">
       <div className="flex-1 gap-x-5">
-        <Link className="font-bold normal-case" href="/">
+        <Link className="font-bold normal-case" href="/dashboard">
           Autoshop
         </Link>
         <p className="align-middle">{session?.user?.email}</p>
