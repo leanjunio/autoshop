@@ -20,6 +20,13 @@ enum Status {
   INACTIVE
 }
 
+// reference: https://www.firestonecompleteautocare.com/blog/maintenance/car-service-explained/
+enum ServiceType {
+  INTERIM
+  FULL
+  MAJOR
+}
+
 model User {
   id           String    @id @default(auto()) @map("_id") @db.ObjectId
   name         String
@@ -74,4 +81,5 @@ model Invoice {
   Vehicle    Vehicle? @relation(fields: [vehicleId], references: [id])
   vehicleId  String?  @db.ObjectId
   date       String
+  service    ServiceType      @default(INTERIM)
 }

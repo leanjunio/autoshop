@@ -16,6 +16,7 @@ const validationSchema = z.object({
   total_cost: z.number().positive(),
   vehicleId: z.string(),
   date: z.string(),
+  service: z.enum(["INTERIM", "FULL", "MAJOR"])
 });
 
 type FormData = z.infer<typeof validationSchema>;
@@ -73,9 +74,6 @@ export const getServerSideProps: GetServerSideProps<ResponseType> = async ({
 type EditInvoicePageProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 export default function EditInvoicePage({ vehicles, invoice }: EditInvoicePageProps) {
-  console.log({
-    invoice
-  })
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues: {
       ...invoice,
@@ -133,6 +131,20 @@ export default function EditInvoicePage({ vehicles, invoice }: EditInvoicePagePr
                     {vehicles.map((vehicle) => (
                       <option key={vehicle.id} value={vehicle.id}>{vehicle.manufacturer} {vehicle.model}</option>
                     ))}
+                  </select>
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.vehicleId?.message}</span>
+                  </label>
+                </div>
+                <div className="form-control w-full max-w-xs">
+                  <label className="label">
+                    <span className="label-text">Service</span>
+                  </label>
+                  <select className="select select-bordered w-full max-w-xs" {...register("service")}>
+                    <option disabled selected>Choose service</option>
+                    <option value="INTERIM">Interim</option>
+                    <option value="FULL">Full</option>
+                    <option value="MAJOR">Major</option>
                   </select>
                   <label className="label">
                     <span className="label-text-alt text-error">{errors.vehicleId?.message}</span>

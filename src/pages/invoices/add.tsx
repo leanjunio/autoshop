@@ -16,6 +16,7 @@ const validationSchema = z.object({
   total_cost: z.number().positive(),
   vehicle: z.string(),
   date: z.date(),
+  service: z.enum(["INTERIM", "FULL", "MAJOR"])
 });
 
 type FormData = z.infer<typeof validationSchema>;
@@ -126,6 +127,20 @@ export default function AddInvoicePage({ user }: AddInvoicePageProps) {
                     {user.vehicles.map((vehicle) => (
                       <option key={vehicle.id} value={vehicle.id}>{vehicle.manufacturer} {vehicle.model}</option>
                     ))}
+                  </select>
+                  <label className="label">
+                    <span className="label-text-alt text-error">{errors.vehicle?.message}</span>
+                  </label>
+                </div>
+                <div className="form-control w-full max-w-xs">
+                  <label className="label">
+                    <span className="label-text">Service</span>
+                  </label>
+                  <select className="select select-bordered w-full max-w-xs" {...register("service")}>
+                    <option disabled selected>Choose service</option>
+                    <option value="INTERIM">Interim</option>
+                    <option value="FULL">Full</option>
+                    <option value="MAJOR">Major</option>
                   </select>
                   <label className="label">
                     <span className="label-text-alt text-error">{errors.vehicle?.message}</span>
