@@ -1,4 +1,3 @@
-import Layout from "@/components/layout";
 import Navbar from "@/components/navbar";
 import Head from "next/head";
 import { FiAward, FiClock, FiDollarSign, FiGlobe, FiHeart, FiShield } from "react-icons/fi";
@@ -17,10 +16,10 @@ export default function HomePage() {
           <div className="mx-auto max-w-xl text-center">
             <h1 className="text-3xl font-extrabold sm:text-5xl">
               Autoshop Services
-              <strong className="font-extrabold text-accent sm:block">
-                Easy Expense Tracking.
-              </strong>
             </h1>
+            <p className="font-extrabold text-accent sm:block text-2xl sm:text-5xl">
+              Easy Expense Tracking.
+            </p>
 
             <p className="mt-4 sm:text-xl sm:leading-relaxed">
               Request your trustworthy auto shop to better serve you and become an Autoshop affiliate.
